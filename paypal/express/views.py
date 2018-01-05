@@ -97,6 +97,7 @@ class RedirectView(CheckoutSessionMixin, RedirectView):
             raise EmptyBasketException()
 
         params = {
+            'request': self.request,
             'basket': basket,
             'shipping_methods': []          # setup a default empty list
         }                                   # to support no_shipping

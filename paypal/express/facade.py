@@ -22,7 +22,7 @@ def _get_payment_action():
     return action
 
 
-def get_paypal_url(basket, shipping_methods, user=None, shipping_address=None,
+def get_paypal_url(request, basket, shipping_methods, user=None, shipping_address=None,
                    shipping_method=None, host=None, scheme=None,
                    paypal_params=None):
     """
@@ -38,7 +38,7 @@ def get_paypal_url(basket, shipping_methods, user=None, shipping_address=None,
     else:
         currency = getattr(settings, 'PAYPAL_CURRENCY', 'GBP')
     if host is None:
-        host = Site.objects.get_current().domain
+        host = Site.objects.get_current(request).domain
     if scheme is None:
         use_https = getattr(settings, 'PAYPAL_CALLBACK_HTTPS', True)
         scheme = 'https' if use_https else 'http'
